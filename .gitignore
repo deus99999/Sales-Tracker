@@ -1,0 +1,38 @@
+# Python files
+__pycache__/
+*.py[cod]
+
+# Environment variables
+.env
+
+# CSV data files
+sales_data.csv
+test_sales_data.csv
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Virtual environments
+venv/
+env/
+*.egg-info/
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+*.pyd
+
+# Test output
+coverage/
+.tox/
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# MacOS specific files
+.DS_Store
