@@ -35,4 +35,4 @@ coverage/
 *.sqlite3
 
 # MacOS specific files
-.DS_Store
+.DS_Store!/guitar_sales_data.csv

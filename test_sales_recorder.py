@@ -23,10 +23,10 @@ class TestSalesRecorder(unittest.TestCase):
             csv_reader = csv.reader(csvfile, delimiter=';')
             headers = next(csv_reader)
             print(headers)
-            self.assertEqual(headers, ['Date', 'Product', 'Quantity', 'Spent' 'Sold', 'Net profit'])
+            self.assertEqual(headers, ['Date', 'Product', 'Spent' 'Sold', 'Net profit'])
 
     def test_add_sale(self):
-        self.recorder.add_sale('Guitar', 1, 2000, 3400)
+        self.recorder.add_sale('Guitar', 2000, 3400)
         with open(self.test_filename, mode='r') as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=';')
             headers = next(csv_reader)  # Пропускаем заголовки
@@ -34,8 +34,8 @@ class TestSalesRecorder(unittest.TestCase):
             sale = next(csv_reader)
 
             print('Sale: ', sale)
-            self.assertEqual(len(sale), 6)
+            self.assertEqual(len(sale), 5)
             self.assertEqual(sale[1], 'Guitar')
-            self.assertEqual(int(sale[2]), 1)
-            self.assertEqual(float(sale[3]), 2000)
-            self.assertEqual(float(sale[4]), 3400)
+            self.assertEqual(float(sale[2]), 2000)
+            self.assertEqual(float(sale[3]), 3400)
+            self.assertEqual(float(sale[4]), 3400 - 2000)

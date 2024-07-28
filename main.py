@@ -37,32 +37,50 @@ def make_widgets(recorder):
     window = Tk()
     window.title('Sales Tracker')
     window.geometry("400x300")
+    font = ("Times New Roman", 12)
 
-    label = Label(window, text="Enter product's name: ")
+    label = Label(window, text="Enter product's name: ", font=font)
     label.pack(side=TOP)
 
-    product = Entry(window)
+    product = Entry(window, width=40, font=font)
     product.pack(side=TOP)
 
-    label = Label(window, text="How many money was spend: ")
+    label = Label(window, text="How many money was spend: ", font=font)
     label.pack(side=TOP)
 
-    spent_field = Entry(window)
+    spent_field = Entry(window, width=40, font=font)
     spent_field.pack(side=TOP)
 
-    label = Label(window, text="Price: ")
+    label = Label(window, text="Sold: ", font=font)
     label.pack(side=TOP)
 
-    sold_field = Entry(window)
+    sold_field = Entry(window, width=40, font=font)
     sold_field.pack(side=TOP)
 
     def add_to_database():
-        recorder.add_sale(product.get(), spent_field.get(), sold_field.get())
-        showinfo(title="Success", message="Sale added to database!")
+        product_value = product.get()
+        spent_value = spent_field.get()
+        sold_value = sold_field.get()
 
-    btn = Button(window, text="Add to database", command=add_to_database)
+        if product_value and spent_value and sold_value:
+            if spent_value.isdigit() and sold_value.isdigit():
+                recorder.add_sale(product.get(), spent_field.get(), sold_field.get())
+                showinfo(title="Success", message="Sale added to database!")
+            else:
+                showerror(title="Error", message="Spend and Sold fields must be digits")
 
-    btn.pack(side=LEFT)
+        else:
+            showerror(title="Error", message="All fields must be filled")
+    #     clear_fields()
+    #
+    # def clear_fields():
+    #     product.delete(0, END)
+    #     spent_field.delete(0, END)
+    #     sold_field.delete(0, END)
+
+    btn = Button(window, text="Add to database", command=add_to_database, font=font)
+
+    btn.pack()
     return window
 
 
