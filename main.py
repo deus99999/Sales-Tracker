@@ -24,11 +24,10 @@ class SalesRecorder:
             csv_writer.writerow(['Date', 'Product', 'Spent' 'Sold', 'Net profit'])
 
     def add_sale(self, product, spent, sold):
-        print(spent, sold)
         net_profit = int(sold) - int(spent)
         new_sale = [date, product, spent, sold, net_profit]
 
-        with open(self.filename, mode='a') as csvfile:
+        with open(self.filename, mode='a',  newline='', encoding='cp1251') as csvfile:
             csv_writer = csv.writer(csvfile, delimiter=';')
             csv_writer.writerow(new_sale)
 
@@ -66,17 +65,17 @@ def make_widgets(recorder):
             if spent_value.isdigit() and sold_value.isdigit():
                 recorder.add_sale(product.get(), spent_field.get(), sold_field.get())
                 showinfo(title="Success", message="Sale added to database!")
+                clear_fields()
             else:
                 showerror(title="Error", message="Spend and Sold fields must be digits")
 
         else:
             showerror(title="Error", message="All fields must be filled")
-    #     clear_fields()
-    #
-    # def clear_fields():
-    #     product.delete(0, END)
-    #     spent_field.delete(0, END)
-    #     sold_field.delete(0, END)
+
+    def clear_fields():
+        product.delete(0, END)
+        spent_field.delete(0, END)
+        sold_field.delete(0, END)
 
     btn = Button(window, text="Add to database", command=add_to_database, font=font)
 
